@@ -13,6 +13,7 @@ const config = JSON.parse(fs.readFileSync(configPath));
 const github = new GitHubAPI(config.GITHUB_TOKEN, config.CLIENT_ID, config.CLIENT_SECRET);
 
 const performScan = () => {
+  console.log(`Running scan at ${new Date()}`);
   const duplicateMap = {};
 
   github.getIssues()
@@ -43,4 +44,5 @@ const performScan = () => {
     .catch((err) => console.log(err));
 };
 
+performScan();
 setInterval(performScan, 60 * 1000 * 15);
